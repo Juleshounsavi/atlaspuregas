@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link rel="icon" type="image/x-icon" href="dav.ico"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ATLAS PUREGAZ – Bureau d'études en génie des procédés et environnement. Traitement des gaz, dépollution, optimisation industrielle. Mohammedia, Maroc.">
+<meta name="keywords" content="génie des procédés, traitement gaz, dépollution, COV, scrubber, Mohammedia, Maroc, bureau études">
+<meta property="og:title" content="ATLAS PUREGAZ – Génie des Procédés & Environnement">
+<meta property="og:description" content="Épurer le gaz, respirer l'avenir._">
+<title>ATLAS PUREGAZ — Bureau d'Études Génie des Procédés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1E293B;          /* Gris ardoise foncé pour un texte très lisible */
+  --ink2:#334155;         /* Variante pour texte secondaire */
+  --surface:#FFFFFF;      /* Fond principal blanc pur */
+  --surface-alt:#F8FAFC;  /* Fond alternatif gris-bleu très clair */
+  --sky-blue:#E0F2FE;     /* Bleu ciel clair pour les overlays ou accents légers */
+  --primary-blue:#0284C7; /* Bleu pro pour les éléments clés */
+  --mint:#34D399;         /* Vert clair rafraîchissant pour les touches d'accentuation */
+  --mint-dark:#059669;    /* Vert plus soutenu pour le texte sur fond clair */
+  --mint-light:rgba(52,211,153,0.12);
+  --blue-light:rgba(2,132,199,0.06);
+  --white:#FFFFFF;
+  --muted:#64748B;
+  --muted2:#475569;
+  --border:rgba(2,132,199,0.15);
+  --border2:rgba(34,197,94,0.2);
+  --ff-display:'Montserrat', sans-serif;
+  --ff-body:'Inter', Arial, sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--surface);color:var(--ink);font-family:var(--ff-body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.3}
+
+/* ── CANVAS ── */
+#c{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.6}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  padding:0 64px;height:72px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(20px) saturate(150%);
+  border-bottom:1px solid var(--border);
+  transition:background 0.3s}
+nav.scrolled{background:rgba(255,255,255,0.96);box-shadow:0 4px 20px rgba(0,0,0,0.03)}
+.nav-brand{display:flex;flex-direction:column;gap:1px;text-decoration:none}
+.nav-brand-name{
+  font-family:var(--ff-display);font-size:1.1rem;font-weight:800;
+  letter-spacing:0.1em;color:var(--primary-blue);line-height:1}
+.nav-brand-sub{
+  font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;font-family:var(--ff-body)}
+.nav-links{display:flex;gap:8px;list-style:none;align-items:center}
+.nav-links a{
+  color:var(--muted2);text-decoration:none;font-size:0.8rem;
+  letter-spacing:0.05em;font-weight:500;padding:8px 14px;border-radius:4px;
+  transition:color 0.2s,background 0.2s}
+.nav-links a:hover{color:var(--primary-blue);background:var(--blue-light)}
+.nav-links a.active{color:var(--primary-blue);font-weight:600}
+.nav-cta{
+  background:var(--primary-blue)!important;color:var(--white)!important;
+  font-weight:600!important;border-radius:4px!important;padding:8px 20px!important;
+  box-shadow:0 2px 8px rgba(2,132,199,0.2)}
+.nav-cta:hover{background:#0270a9!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;
+  background:none;border:none;padding:4px}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);transition:all .3s}
+
+/* ── HERO ── */
+#hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  padding:0 64px;z-index:1;overflow:hidden;background:linear-gradient(180deg, #F0F9FF 0%, var(--surface) 100%)}
+.hero-grid-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(2,132,199,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(2,132,199,0.03) 1px,transparent 1px);
+  background-size:72px 72px}
+.hero-orb{
+  position:absolute;top:-200px;right:-150px;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,rgba(52,211,153,0.12) 0%,transparent 65%);
+  pointer-events:none;z-index:0}
+.hero-orb2{
+  position:absolute;bottom:-300px;left:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(2,132,199,0.08) 0%,transparent 70%);
+  pointer-events:none;z-index:0}
+.hero-content{position:relative;z-index:2;max-width:780px;padding-top:80px;padding-bottom:40px}
+.hero-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--primary-blue);font-family:var(--ff-body);font-weight:600;
+  margin-bottom:28px;
+  border:1px solid rgba(2,132,199,0.2);padding:8px 16px;border-radius:100px;
+  background:rgba(2,132,199,0.05)}
+.hero-label span{
+  width:6px;height:6px;border-radius:50%;background:var(--mint);
+  animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero-h1{
+  font-family:var(--ff-display);
+  font-size:clamp(3.5rem,7vw,6.5rem);
+  font-weight:800;line-height:0.95;
+  letter-spacing:-0.03em;
+  color:var(--ink);
+  margin-bottom:24px}
+.hero-h1 em{font-style:normal;color:var(--primary-blue);background:linear-gradient(to right, var(--primary-blue), var(--mint-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-tagline{
+  font-family:var(--ff-body);font-weight:500;
+  font-size:clamp(0.95rem,1.5vw,1.15rem);
+  color:var(--muted2);letter-spacing:0.02em;
+  margin-bottom:12px}
+.hero-slogan{
+  font-family:var(--ff-display);font-size:clamp(1.1rem,2vw,1.4rem);
+  font-weight:700;color:var(--mint-dark);margin-bottom:36px;
+  padding-left:18px;border-left:3px solid var(--mint)}
+.hero-desc{
+  font-size:0.97rem;line-height:1.8;color:var(--muted2);
+  max-width:560px;margin-bottom:52px;font-weight:400}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+.btn-teal{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary-blue);color:var(--white);
+  font-family:var(--ff-body);font-size:0.82rem;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;
+  padding:14px 28px;border-radius:4px;text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 4px 14px rgba(2,132,199,0.25);
+  transition:background 0.2s,transform 0.2s}
+.btn-teal:hover{background:#0270a9;transform:translateY(-2px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(2,132,199,0.3);color:var(--primary-blue);
+  font-family:var(--ff-body);font-size:0.82rem;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;
+  padding:14px 28px;border-radius:4px;text-decoration:none;
+  background:transparent;
+  transition:border-color 0.2s,background 0.2s}
+.btn-ghost:hover{border-color:var(--primary-blue);background:var(--blue-light)}
+
+/* ── METRICS FIXED ── */
+.hero-metrics{
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  margin-top:20px}
+.metric-item{
+  display:flex;
+  flex-direction:column;
+  min-width:110px}
+.metric-val{
+  font-family:var(--ff-display);
+  font-size:2.4rem;
+  font-weight:800;
+  color:var(--primary-blue);
+  line-height:1.1}
+.metric-label{
+  font-size:0.75rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:6px;
+  font-weight:600;
+  line-height:1.3}
+
+.hero-scroll-hint{
+  position:absolute;bottom:40px;left:64px;z-index:2;
+  display:flex;align-items:center;gap:12px;
+  font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.scroll-line{width:40px;height:1px;background:var(--muted);opacity:0.6}
+.hero-tech-panel{
+  position:absolute;right:64px;top:50%;transform:translateY(-50%);
+  z-index:2;display:flex;flex-direction:column;gap:12px}
+.tech-chip{
+  background:var(--white);border:1px solid rgba(2,132,199,0.12);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  padding:10px 16px;border-radius:4px;font-size:0.72rem;
+  letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2);
+  text-align:right;transition:border-color 0.3s,color 0.3s;font-family:var(--ff-body);font-weight:500}
+.tech-chip:hover{border-color:var(--primary-blue);color:var(--primary-blue)}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1}
+.s-inner{max-width:1280px;margin:0 auto;padding:120px 64px}
+.s-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--primary-blue);font-weight:700;margin-bottom:20px;font-family:var(--ff-body)}
+.s-tag::before{content:'';width:24px;height:2px;background:var(--mint)}
+.s-h2{
+  font-family:var(--ff-display);font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin-bottom:16px;color:var(--ink)}
+.s-sub{color:var(--muted);font-size:1rem;line-height:1.75;max-width:540px;margin-bottom:64px;font-weight:400}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ── ABOUT ── */
+#about{background:var(--surface-alt);border-top:1px solid rgba(0,0,0,0.03);border-bottom:1px solid rgba(0,0,0,0.03)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.about-copy p{color:var(--muted2);line-height:1.8;font-size:0.97rem;margin-bottom:18px;font-weight:400}
+.about-copy strong{color:var(--ink);font-weight:600}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.tag-pill{
+  font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;font-weight:600;
+  padding:6px 14px;border-radius:100px;border:1px solid rgba(2,132,199,0.15);
+  color:var(--primary-blue);background:rgba(2,132,199,0.04);font-family:var(--ff-body)}
+.about-visual{position:relative}
+.chem-svg{width:100%;display:block}
+
+/* ── EXPERTISES ── */
+#expertises{background:var(--surface)}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.exp-card{
+  background:var(--surface-alt);padding:52px 44px;border-radius:4px;
+  border:1px solid rgba(0,0,0,0.02);box-shadow:0 4px 20px rgba(0,0,0,0.01);
+  transition:transform 0.3s, box-shadow 0.3s, background 0.3s;position:relative;overflow:hidden}
+.exp-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--primary-blue);transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.exp-card:hover{background:var(--white);transform:translateY(-4px);box-shadow:0 10px 30px rgba(2,132,199,0.06);border-color:rgba(2,132,199,0.1)}
+.exp-card:hover::after{transform:scaleX(1)}
+.exp-num{
+  font-family:var(--ff-display);font-size:3.5rem;font-weight:800;
+  color:rgba(2,132,199,0.08);line-height:1;margin-bottom:24px;
+  letter-spacing:-0.04em}
+.exp-icon{
+  width:44px;height:44px;margin-bottom:20px;
+  border:1px solid rgba(2,132,199,0.2);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--blue-light)}
+.exp-icon svg{width:22px;height:22px;stroke:var(--primary-blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.exp-card h3{
+  font-family:var(--ff-display);font-size:1.15rem;font-weight:700;
+  margin-bottom:14px;letter-spacing:-0.01em;color:var(--ink)}
+.exp-card p{color:var(--muted2);font-size:0.9rem;line-height:1.75;font-weight:400}
+.exp-card ul{margin-top:14px;padding-left:0;list-style:none}
+.exp-card li{
+  font-size:0.85rem;color:var(--ink2);padding:6px 0;
+  border-bottom:1px solid rgba(0,0,0,0.04);
+  display:flex;align-items:center;gap:8px}
+.exp-card li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--mint);flex-shrink:0}
+
+/* ── PROJETS ── */
+#projets{background:var(--surface-alt)}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.proj-card{
+  background:var(--white);border:1px solid rgba(0,0,0,0.04);
+  box-shadow:0 4px 16px rgba(0,0,0,0.02);
+  padding:44px;border-radius:4px;
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;
+  cursor:default}
+.proj-card:hover{border-color:rgba(2,132,199,0.2);transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,0.05)}
+.proj-card.wide{grid-column:1/-1;
+  background:linear-gradient(135deg, var(--white) 0%, #F0FDF4 100%);
+  border-color:rgba(34,197,94,0.15)}
+.proj-label{
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;
+  color:var(--mint-dark);background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);
+  padding:4px 12px;border-radius:100px;display:inline-block;margin-bottom:22px;font-family:var(--ff-body)}
+.proj-card h3{
+  font-family:var(--ff-display);font-size:1.25rem;font-weight:700;
+  margin-bottom:12px;letter-spacing:-0.01em;color:var(--ink)}
+.proj-card p{color:var(--muted2);font-size:0.92rem;line-height:1.75;margin-bottom:8px;font-weight:400}
+.proj-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.chip{
+  font-size:0.68rem;letter-spacing:0.02em;text-transform:uppercase;font-weight:500;
+  color:var(--muted2);background:#F1F5F9;
+  border:1px solid #E2E8F0;padding:4px 10px;border-radius:4px;font-family:var(--ff-body)}
+.proj-card.wide .chip{border-color:rgba(2,132,199,0.1);background:rgba(2,132,199,0.02);color:var(--primary-blue)}
+
+/* ── OBJECTIFS ── */
+#objectifs{background:var(--surface)}
+.obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.obj-item{
+  padding:44px 36px;border:1px solid rgba(0,0,0,0.04);background:var(--surface-alt);border-radius:4px;
+  text-align:center;transition:border-color 0.3s,background 0.3s,box-shadow 0.3s}
+.obj-item:hover{border-color:rgba(2,132,199,0.15);background:var(--white);box-shadow:0 8px 24px rgba(0,0,0,0.03)}
+.obj-icon{
+  width:52px;height:52px;border-radius:50%;border:1px solid rgba(2,132,199,0.2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;background:var(--blue-light)}
+.obj-icon svg{width:24px;height:24px;stroke:var(--primary-blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.obj-item h3{
+  font-family:var(--ff-display);font-size:1.05rem;font-weight:700;
+  color:var(--primary-blue);margin-bottom:12px}
+.obj-item p{color:var(--muted2);font-size:0.9rem;line-height:1.75;font-weight:400}
+
+/* ── CTA BANDE ── */
+#cta-band{
+  background:linear-gradient(135deg, var(--primary-blue) 0%, #026ea7 100%);color:var(--white);padding:80px 64px;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:1;overflow:hidden;box-shadow:0 10px 30px rgba(2,132,199,0.15)}
+#cta-band::before{
+  content:'';position:absolute;right:-100px;top:-100px;
+  width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,0.05);pointer-events:none}
+.cta-text h2{
+  font-family:var(--ff-display);font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
+.cta-text p{font-size:1rem;font-weight:400;opacity:0.9;max-width:420px;line-height:1.6}
+.btn-dark{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);color:var(--primary-blue);
+  font-family:var(--ff-body);font-size:0.85rem;font-weight:700;
+  letter-spacing:0.05em;text-transform:uppercase;
+  padding:16px 32px;border-radius:4px;text-decoration:none;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  transition:all 0.2s;white-space:nowrap;border:none;cursor:pointer}
+.btn-dark:hover{background:#f8fafc;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.15)}
+
+/* ── CONTACT ── */
+#contact{background:var(--surface-alt)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.contact-line{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:22px;color:var(--ink2);font-size:0.95rem;font-weight:500}
+.contact-line svg{flex-shrink:0;stroke:var(--primary-blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.form{display:flex;flex-direction:column;gap:16px;background:var(--white);padding:40px;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.02)}
+.fg label{display:block;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-family:var(--ff-body);font-weight:600}
+.fg input,.fg textarea,.fg select{
+  width:100%;background:#F8FAFC;
+  border:1px solid #E2E8F0;color:var(--ink);
+  padding:12px 16px;font-family:var(--ff-body);font-size:0.92rem;
+  border-radius:4px;outline:none;transition:all 0.2s;font-weight:400;
+  -webkit-appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--primary-blue);background:var(--white);box-shadow:0 0 0 3px rgba(2,132,199,0.1)}
+.fg textarea{min-height:130px;resize:vertical}
+.fg select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 16px) center}
+.fg select option{background:var(--white)}
+.btn-submit{
+  width:100%;background:var(--primary-blue);color:var(--white);
+  font-family:var(--ff-body);font-size:0.85rem;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;
+  padding:16px;border-radius:4px;border:none;cursor:pointer;
+  box-shadow:0 4px 12px rgba(2,132,199,0.2);
+  transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{background:#0270a9;transform:translateY(-2px);box-shadow:0 6px 18px rgba(2,132,199,0.3)}
+.field-error{border-color:#EF4444!important;background:rgba(239,68,68,0.03)!important}
+.err-msg{font-size:0.75rem;color:#EF4444;margin-top:5px;display:none;letter-spacing:0.02em;font-weight:500}
+.err-msg.show{display:block}
+.shake{animation:shake 0.4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:48px 64px;position:relative;z-index:1}
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.footer-brand{font-family:var(--ff-display);font-size:1.05rem;font-weight:800;color:var(--primary-blue);letter-spacing:0.05em}
+.footer-copy{font-size:0.78rem;color:var(--muted);letter-spacing:0.02em;font-weight:400}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:0.78rem;color:var(--muted2);text-decoration:none;font-weight:500;transition:color 0.2s}
+.footer-links a:hover{color:var(--primary-blue)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .nav-links{display:none}.burger{display:flex}
+  #hero{padding:0 24px;padding-top:72px}
+  .hero-tech-panel{display:none}
+  .hero-scroll-hint{display:none}
+  .s-inner{padding:80px 24px}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
+  .exp-grid{grid-template-columns:1fr}
+  .proj-grid,.obj-grid{grid-template-columns:1fr}
+  .proj-card.wide{grid-column:1}
+  #cta-band{flex-direction:column;gap:28px;padding:60px 24px;text-align:center}
+  .form{padding:30px 20px}
+  footer{padding:32px 24px}
+  .hero-metrics{gap:28px}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column}
+  .hero-metrics{gap:20px;justify-content:flex-start}
+  .metric-item{min-width:40%}
+}
+
+/* ══════════════════════════════════════════════
+   ⚙  ATLAS PUREGAZ — ENGINEERING ANIMATIONS
+   Ajouts purs : aucune modification existante
+══════════════════════════════════════════════ */
+
+/* ── CANVAS ENGINEERING NETWORK (overlay) ── */
+#eng-net{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0}
+  
+/* ── SCROLL REVEAL STAGGER ── */
+.reveal{transition-delay:0ms}
+.reveal-stagger > *{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.65s ease, transform 0.65s ease}
+.reveal-stagger > *.in{opacity:1;transform:none}
+.reveal-stagger > *:nth-child(1){transition-delay:0ms}
+.reveal-stagger > *:nth-child(2){transition-delay:90ms}
+.reveal-stagger > *:nth-child(3){transition-delay:180ms}
+.reveal-stagger > *:nth-child(4){transition-delay:270ms}
+.reveal-stagger > *:nth-child(5){transition-delay:360ms}
+.reveal-stagger > *:nth-child(6){transition-delay:450ms}
+
+/* ── CARD GLOW + MICRO-VIBRATION ── */
+.exp-card{
+  transition:transform 0.3s, box-shadow 0.3s, background 0.3s,
+             border-color 0.3s;
+  will-change:transform}
+.exp-card:hover{
+  box-shadow:
+    0 10px 30px rgba(2,132,199,0.10),
+    0 0 0 1px rgba(2,132,199,0.12),
+    0 0 24px rgba(2,132,199,0.08) !important;
+  animation:card-vibrate 0.35s ease forwards}
+@keyframes card-vibrate{
+  0%  {transform:translateY(-4px)}
+  15% {transform:translateY(-4px) rotate(0.18deg)}
+  30% {transform:translateY(-4px) rotate(-0.18deg)}
+  45% {transform:translateY(-5px) rotate(0.1deg)}
+  60% {transform:translateY(-4px) rotate(-0.1deg)}
+  100%{transform:translateY(-4px) rotate(0deg)}}
+
+.proj-card:hover{
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.06),
+    0 0 0 1px rgba(2,132,199,0.12),
+    0 0 20px rgba(2,132,199,0.06) !important}
+
+.obj-item:hover{
+  box-shadow:
+    0 8px 24px rgba(2,132,199,0.07),
+    0 0 0 1px rgba(2,132,199,0.1) !important}
+
+/* ── ANIMATED BORDER GLOW on cards ── */
+.exp-card,.proj-card,.obj-item,.form{position:relative}
+.exp-card::before,.proj-card::before{
+  content:'';
+  position:absolute;inset:-1px;border-radius:4px;
+  background:linear-gradient(135deg,
+    rgba(2,132,199,0) 0%,
+    rgba(2,132,199,0.18) 50%,
+    rgba(52,211,153,0.12) 100%);
+  opacity:0;transition:opacity 0.4s;z-index:0;pointer-events:none}
+.exp-card:hover::before,.proj-card:hover::before{opacity:1}
+.exp-card > *,.proj-card > *{position:relative;z-index:1}
+
+/* ── PULSE BADGE on hero-label ── */
+.hero-label span{
+  box-shadow:0 0 0 0 rgba(52,211,153,0.6);
+  animation:pulse-ring 2s ease-in-out infinite}
+@keyframes pulse-ring{
+  0%  {box-shadow:0 0 0 0 rgba(52,211,153,0.6)}
+  60% {box-shadow:0 0 0 6px rgba(52,211,153,0)}
+  100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+
+/* ── ANIMATED BORDER BOTTOM on nav active link ── */
+.nav-links a.active{
+  background:var(--blue-light);
+  box-shadow:inset 0 -2px 0 var(--primary-blue)}
+
+/* ── TECH-CHIP ANIMATED BORDER ── */
+.tech-chip{
+  position:relative;overflow:hidden}
+.tech-chip::after{
+  content:'';
+  position:absolute;left:-100%;top:0;
+  width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(2,132,199,0.12),transparent);
+  animation:chip-scan 3.5s linear infinite}
+@keyframes chip-scan{
+  0%  {left:-60%}
+  100%{left:160%}}
+.tech-chip:nth-child(2){animation-delay:0.6s}
+.tech-chip:nth-child(3){animation-delay:1.2s}
+.tech-chip:nth-child(4){animation-delay:1.8s}
+.tech-chip:nth-child(5){animation-delay:2.4s}
+.tech-chip:nth-child(6){animation-delay:3.0s}
+
+/* ── METRIC VALUE GLOW ── */
+.metric-val{
+  text-shadow:0 0 20px rgba(2,132,199,0.15)}
+.metric-item:hover .metric-val{
+  text-shadow:0 0 28px rgba(2,132,199,0.35);
+  transition:text-shadow 0.3s}
+
+/* ── COUNT-UP : valeurs cibles via data-attr ── */
+[data-countup]{display:inline-block;transition:color 0.3s}
+
+/* ── ANIMATED UNDERLINE on section titles ── */
+.s-h2{position:relative;display:inline-block}
+.s-h2::after{
+  content:'';
+  position:absolute;bottom:-8px;left:0;
+  width:0;height:3px;
+  background:linear-gradient(90deg, var(--primary-blue), var(--mint));
+  border-radius:2px;
+  transition:width 0.7s cubic-bezier(.4,0,.2,1) 0.25s}
+.s-h2.in::after{width:60px}
+
+/* ── CTA BAND subtle grid overlay ── */
+#cta-band::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;z-index:0}
+#cta-band > *{position:relative;z-index:1}
+
+/* ── FORM focused border animate ── */
+.fg input:focus,.fg textarea:focus,.fg select:focus{
+  border-color:var(--primary-blue)!important;
+  box-shadow:
+    0 0 0 3px rgba(2,132,199,0.12),
+    0 0 12px rgba(2,132,199,0.08)!important;
+  transition:all 0.25s}
+
+/* ── TAG-PILL HOVER ── */
+.tag-pill{
+  transition:background 0.25s, border-color 0.25s, color 0.25s,
+             transform 0.2s, box-shadow 0.25s}
+.tag-pill:hover{
+  background:rgba(2,132,199,0.10);
+  border-color:rgba(2,132,199,0.35);
+  transform:translateY(-2px);
+  box-shadow:0 4px 10px rgba(2,132,199,0.1)}
+
+/* ── OBJ-ICON PULSE on hover ── */
+.obj-item:hover .obj-icon{
+  animation:icon-pulse 0.6s ease;
+  border-color:rgba(2,132,199,0.4)}
+@keyframes icon-pulse{
+  0%  {transform:scale(1)}
+  40% {transform:scale(1.12)}
+  70% {transform:scale(0.97)}
+  100%{transform:scale(1)}}
+
+/* ── EXP-ICON SPIN on hover ── */
+.exp-card:hover .exp-icon{
+  border-color:rgba(2,132,199,0.45);
+  box-shadow:0 0 12px rgba(2,132,199,0.15);
+  transition:all 0.3s}
+.exp-card:hover .exp-icon svg{
+  animation:icon-spin-partial 0.5s ease forwards}
+@keyframes icon-spin-partial{
+  0%  {transform:rotate(0deg)}
+  60% {transform:rotate(15deg)}
+  100%{transform:rotate(0deg)}}
+
+/* ── FOOTER BRAND subtle glow ── */
+.footer-brand{
+  text-shadow:0 0 20px rgba(2,132,199,0)}
+.footer-brand:hover{
+  text-shadow:0 0 20px rgba(2,132,199,0.3);
+  transition:text-shadow 0.3s}
+
+/* ── HERO H1 letter entrance ── */
+@keyframes hero-enter{
+  from{opacity:0;transform:translateY(20px) skewY(1deg)}
+  to  {opacity:1;transform:none}}
+.hero-h1{animation:hero-enter 0.9s cubic-bezier(.4,0,.2,1) 0.2s both}
+.hero-tagline{animation:hero-enter 0.8s ease 0.45s both}
+.hero-slogan{animation:hero-enter 0.8s ease 0.6s both}
+.hero-desc{animation:hero-enter 0.8s ease 0.75s both}
+.hero-actions{animation:hero-enter 0.8s ease 0.9s both}
+.hero-metrics{animation:hero-enter 0.8s ease 1.05s both}
+
+/* ── SCROLL PROGRESS INDICATOR ── */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg, var(--primary-blue), var(--mint));
+  z-index:9999;transition:width 0.1s linear;
+  box-shadow:0 0 6px rgba(2,132,199,0.4)}
+
+/* ── ENGINEERING SENSOR DOT ── */
+.sensor-dot{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--mint);vertical-align:middle;
+  animation:sensor-blink 1.8s ease-in-out infinite}
+@keyframes sensor-blink{
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,0.5)}
+  50%{opacity:0.4;box-shadow:0 0 0 4px rgba(52,211,153,0)}}
+
+/* ── ABOUT SVG rotation slow ── */
+.chem-svg .dashed-ring{
+  transform-origin:230px 230px;
+  animation:ring-rotate 30s linear infinite}
+@keyframes ring-rotate{
+  from{transform:rotate(0deg)}
+  to  {transform:rotate(360deg)}}
+
+/* ── PROJ-CARD chip hover ── */
+.chip{transition:background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s}
+.chip:hover{
+  background:rgba(2,132,199,0.08);
+  border-color:rgba(2,132,199,0.25);
+  color:var(--primary-blue);
+  transform:translateY(-1px)}
+
+/* ── ENGINEERING WATERMARK OVERLAY (section bg) ── */
+#expertises::before{
+  content:'⚙';
+  position:absolute;right:60px;top:40px;
+  font-size:180px;opacity:0.02;
+  color:var(--primary-blue);
+  pointer-events:none;z-index:0;
+  animation:watermark-float 8s ease-in-out infinite}
+#about::before{
+  content:'◈';
+  position:absolute;left:40px;bottom:40px;
+  font-size:160px;opacity:0.025;
+  color:var(--primary-blue);
+  pointer-events:none;z-index:0;
+  animation:watermark-float 10s ease-in-out infinite reverse}
+@keyframes watermark-float{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-12px) rotate(5deg)}}
+
+/* ── BTN-TEAL scan shine ── */
+.btn-teal{overflow:hidden;position:relative}
+.btn-teal::after{
+  content:'';
+  position:absolute;top:0;left:-100%;
+  width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  transition:left 0s}
+.btn-teal:hover::after{
+  left:150%;transition:left 0.5s ease}
+
+/* ── CONTACT FORM pulse on submit hover ── */
+.btn-submit{overflow:hidden;position:relative}
+.btn-submit::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%);
+  opacity:0;transition:opacity 0.3s}
+.btn-submit:hover::before{opacity:1}
+
+/* responsive: désactiver les gros watermarks ── */
+@media(max-width:960px){
+  #expertises::before,#about::before{display:none}
+}
+
+/* ══════════════════════════════════════════════
+   ⚙  ATLAS PUREGAZ — ENHANCED INDUSTRIAL FX v2
+   Ajouts purs — rien de supprimé/modifié
+══════════════════════════════════════════════ */
+
+/* ── GAS PARTICLE CANVAS (dédié flux de gaz) ── */
+#gas-canvas{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;opacity:0;
+  transition:opacity 1.8s ease}
+
+/* ── SENSOR STATUS BAR (barre de télémétrie hero) ── */
+.sensor-bar{
+  position:absolute;bottom:110px;left:64px;z-index:2;
+  display:flex;gap:20px;align-items:center}
+.sensor-readout{
+  font-family:var(--ff-body);font-size:0.68rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:6px;
+  padding:5px 12px;border:1px solid rgba(2,132,199,0.12);
+  border-radius:3px;background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(8px)}
+.sensor-readout .val{
+  color:var(--primary-blue);font-weight:700;
+  font-variant-numeric:tabular-nums}
+.sensor-readout.green .val{color:var(--mint-dark)}
+@media(max-width:960px){.sensor-bar{display:none}}
+
+/* ── COUNT-UP DIGITAL FONT FEEL ── */
+[data-countup]{
+  font-variant-numeric:tabular-nums;
+  transition:color 0.3s, text-shadow 0.3s}
+[data-countup].counting{
+  color:var(--mint-dark)!important;
+  text-shadow:0 0 20px rgba(52,211,153,0.4)!important}
+
+/* ── METRIC ITEM ANIMATED BAR ── */
+.metric-item{position:relative;padding-bottom:10px}
+.metric-item::after{
+  content:'';
+  position:absolute;bottom:0;left:0;
+  height:2px;width:0;
+  background:linear-gradient(90deg,var(--primary-blue),var(--mint));
+  border-radius:1px;
+  transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.metric-item.counted::after{width:100%}
+
+/* ── EXP-CARD CORNER BRACKETS ── */
+.exp-card .corner-tl,
+.exp-card .corner-br{
+  position:absolute;width:12px;height:12px;
+  border-color:rgba(2,132,199,0);
+  border-style:solid;
+  transition:border-color 0.3s, width 0.3s, height 0.3s;
+  pointer-events:none}
+.exp-card .corner-tl{top:10px;left:10px;border-width:1.5px 0 0 1.5px}
+.exp-card .corner-br{bottom:10px;right:10px;border-width:0 1.5px 1.5px 0}
+.exp-card:hover .corner-tl,
+.exp-card:hover .corner-br{
+  border-color:var(--primary-blue);
+  width:18px;height:18px}
+
+/* ── PROJ-CARD SCAN LINE ── */
+.proj-card .scan-line{
+  position:absolute;top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(2,132,199,0.4),rgba(52,211,153,0.3),transparent);
+  transform:translateY(-1px);
+  transition:none;pointer-events:none;opacity:0}
+.proj-card:hover .scan-line{
+  animation:proj-scan 1.4s ease forwards}
+@keyframes proj-scan{
+  0%  {opacity:0;transform:translateY(0)}
+  10% {opacity:1}
+  90% {opacity:0.5}
+  100%{opacity:0;transform:translateY(100%)}
+}
+
+/* ── FORM FIELD ENGINEERING FOCUS LINE ── */
+.fg{position:relative}
+.fg::after{
+  content:'';
+  position:absolute;bottom:0;left:0;
+  width:0;height:2px;
+  background:linear-gradient(90deg,var(--primary-blue),var(--mint));
+  transition:width 0.35s ease;
+  border-radius:0 0 2px 2px;pointer-events:none}
+.fg:focus-within::after{width:100%}
+
+/* ── TECH-CHIP STATUS DOT ── */
+.tech-chip .chip-dot{
+  display:inline-block;width:5px;height:5px;
+  border-radius:50%;background:var(--mint);
+  margin-right:6px;vertical-align:middle;
+  animation:sensor-blink 1.8s ease-in-out infinite}
+
+/* ── INDUSTRIAL GRID SECTION BG PULSE ── */
+#expertises .s-inner::before{
+  content:'';
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(2,132,199,0.03) 0%,transparent 70%);
+  animation:eng-orb-pulse 6s ease-in-out infinite;
+  pointer-events:none}
+@keyframes eng-orb-pulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}
+  50%{transform:translate(-50%,-50%) scale(1.15);opacity:0.6}}
+
+/* ── DATA FLOW LINE between about sections ── */
+.data-flow-line{
+  position:absolute;right:0;top:50%;
+  width:3px;height:0;
+  background:linear-gradient(180deg,transparent,var(--primary-blue),var(--mint),transparent);
+  opacity:0;transition:height 1.2s ease, opacity 0.5s;
+  transform:translateY(-50%);pointer-events:none;border-radius:2px}
+#about.in-view .data-flow-line{height:60%;opacity:0.15}
+
+/* ── OBJ-ITEM COUNT BADGE ── */
+.obj-item .eng-badge{
+  position:absolute;top:14px;right:14px;
+  font-family:var(--ff-display);font-size:0.6rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(2,132,199,0.3);font-weight:700}
+
+/* ── BUTTON ENGINEERING PULSE ── */
+.btn-teal:active,.btn-ghost:active,.btn-dark:active{
+  animation:btn-eng-click 0.25s ease}
+@keyframes btn-eng-click{
+  0%  {box-shadow:0 0 0 0 rgba(2,132,199,0.5)}
+  100%{box-shadow:0 0 0 16px rgba(2,132,199,0)}}
+
+/* ── FOOTER TECH TICKER ── */
+.eng-ticker{
+  width:100%;overflow:hidden;
+  border-top:1px solid rgba(2,132,199,0.08);
+  padding:10px 0;margin-bottom:-8px}
+.eng-ticker-inner{
+  display:flex;gap:48px;width:max-content;
+  animation:ticker-scroll 25s linear infinite;
+  font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(100,116,139,0.5);font-family:var(--ff-body);font-weight:600}
+@keyframes ticker-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}}
+.eng-ticker-inner span{white-space:nowrap}
+.eng-ticker-inner .sep{color:rgba(2,132,199,0.25)}
+
+/* ── HERO GRID BG animated drift ── */
+.hero-grid-bg{
+  animation:grid-drift 20s ease-in-out infinite alternate}
+@keyframes grid-drift{
+  0%{background-position:0 0}
+  100%{background-position:72px 36px}}
+
+/* ── SCROLL PROGRESS SEGMENTS ── */
+#scroll-progress{
+  background:linear-gradient(90deg,var(--primary-blue) 0%,var(--mint-dark) 60%,var(--mint) 100%);
+  box-shadow:0 0 8px rgba(52,211,153,0.3),0 0 3px rgba(2,132,199,0.5)!important}
+
+/* ── NAV BRAND animated underline ── */
+.nav-brand-name{
+  position:relative;display:inline-block}
+.nav-brand-name::after{
+  content:'';position:absolute;bottom:-2px;left:0;
+  width:0;height:1px;background:var(--primary-blue);
+  transition:width 0.4s ease}
+.nav-brand:hover .nav-brand-name::after{width:100%}
+
+/* ── CONTACT SECTION LEFT PANEL engineering detail ── */
+.contact-eng-detail{
+  margin-top:36px;padding:18px 20px;
+  border:1px solid rgba(2,132,199,0.1);
+  border-left:3px solid var(--mint);
+  border-radius:3px;background:rgba(2,132,199,0.02)}
+.contact-eng-detail .eng-label{
+  font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:10px;font-family:var(--ff-body)}
+.contact-eng-detail .eng-stat{
+  display:flex;justify-content:space-between;
+  font-size:0.8rem;color:var(--ink2);padding:5px 0;
+  border-bottom:1px solid rgba(0,0,0,0.03)}
+.contact-eng-detail .eng-stat:last-child{border-bottom:none}
+.contact-eng-detail .eng-stat span{color:var(--primary-blue);font-weight:600;font-family:var(--ff-display)}
+@media(max-width:960px){.contact-eng-detail{display:none}}
+
+/* ── SECTION REVEAL ENHANCED (fade + slide + blur) ── */
+.reveal{
+  filter:blur(2px)}
+.reveal.in{
+  filter:blur(0);
+  transition:opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease!important}
+
+/* ── HERO ACTIONS glow pulse loop on CTA ── */
+.btn-teal{
+  animation:cta-glow-idle 3s ease-in-out infinite 2s}
+@keyframes cta-glow-idle{
+  0%,100%{box-shadow:0 4px 14px rgba(2,132,199,0.25)}
+  50%{box-shadow:0 4px 24px rgba(2,132,199,0.45),0 0 0 4px rgba(2,132,199,0.08)}}
+.btn-teal:hover{animation:none}
+
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<canvas id="gas-canvas"></canvas>
+<canvas id="eng-net"></canvas>
+<canvas id="c"></canvas>
+
+<nav id="nav">
+  <a class="nav-brand" href="#hero">
+    <span class="nav-brand-name">ATLAS PUREGAZ</span>
+    <span class="nav-brand-sub">Génie des Procédés &amp; Environnement</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#expertises">Expertises</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#objectifs">Vision</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-content">
+    <div class="hero-label"><span></span>Bureau d'études industrielles — Mohammedia, Maroc</div>
+    <h1 class="hero-h1">ATLAS<br><em>PUREGAZ</em></h1>
+    <p class="hero-tagline">Bureau d'Études en Génie des Procédés &amp; Environnement</p>
+    <p class="hero-slogan">Épurer le gaz, respirer l'avenir</p>
+    <p class="hero-desc">
+      Nous accompagnons les industries dans l'analyse, la modélisation et l'optimisation de leurs procédés.
+      Notre expertise repose sur la science des transferts, la performance des réacteurs et la maîtrise des impacts environnementaux.
+    </p>
+    <div class="hero-actions">
+      <a href="#projets" class="btn-teal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Nos projets
+      </a>
+      <a href="#contact" class="btn-ghost">Nous contacter</a>
+    </div>
+    
+    <div class="hero-metrics">
+      <div class="metric-item">
+        <div class="metric-val" >4+</div>
+        <div class="metric-label">Projets</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-val" >2</div>
+        <div class="metric-label">Secteurs clés</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-val">ISO</div>
+        <div class="metric-label">Conformité</div>
+      </div>
+      
+      
+    </div>
+    
+  </div>
+  <div class="hero-tech-panel">
+    <div class="tech-chip"><span class="chip-dot"></span>DTS / Hydrodynamique</div>
+    <div class="tech-chip"><span class="chip-dot"></span>Scrubber chimique</div>
+    <div class="tech-chip"><span class="chip-dot"></span>Traitement COV</div>
+    <div class="tech-chip"><span class="chip-dot"></span>Colonnes d'absorption</div>
+    <div class="tech-chip"><span class="chip-dot"></span>ORP / pH régulation</div>
+    <div class="tech-chip"><span class="chip-dot"></span>Réduction émissions</div>
+  </div>
+  
+  
+</section>
+
+<section id="about">
+  <div class="s-inner">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <div class="s-tag">À propos</div>
+        <h2 class="s-h2">Une ingénierie au service de l'industrie durable</h2>
+        <p>
+          <strong>ATLAS PUREGAZ</strong> est un bureau d'études spécialisé dans l'ingénierie des procédés et l'environnement.
+          Nous transformons les problématiques industrielles en solutions techniques <strong>fiables, durables et optimisées</strong>.
+        </p>
+        <p>
+          Notre approche combine rigueur scientifique, modélisation avancée et expérience de terrain pour répondre aux défis des industries marocaines et internationales.
+        </p>
+        <p>
+          De la phase d'étude à la mise en œuvre, nous accompagnons nos clients à chaque étape : diagnostic, dimensionnement, conception et suivi de performance.
+        </p>
+        <div class="about-tags">
+          <span class="tag-pill">Hydrodynamique DTS</span>
+          <span class="tag-pill">Scrubber chimique</span>
+          <span class="tag-pill">Colonnes COV</span>
+          <span class="tag-pill">Transferts de matière</span>
+          <span class="tag-pill">Désodorisation</span>
+          <span class="tag-pill">Modélisation procédés</span>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <svg class="chem-svg" viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(2,132,199,0.08)"/>
+              <stop offset="100%" stop-color="rgba(2,132,199,0)"/>
+            </radialGradient>
+          </defs>
+          <circle cx="230" cy="230" r="200" fill="none" stroke="rgba(2,132,199,0.1)" stroke-width="1"/>
+          <circle class="dashed-ring" cx="230" cy="230" r="160" fill="none" stroke="rgba(2,132,199,0.12)" stroke-width="1" stroke-dasharray="6 8"/>
+          <circle cx="230" cy="230" r="110" fill="none" stroke="rgba(2,132,199,0.15)" stroke-width="1"/>
+          <circle cx="230" cy="230" r="60" fill="url(#bg-grad)" stroke="rgba(2,132,199,0.2)" stroke-width="1"/>
+          <line x1="230" y1="230" x2="80" y2="100" stroke="rgba(2,132,199,0.25)" stroke-width="1"/>
+          <line x1="230" y1="230" x2="380" y2="100" stroke="rgba(2,132,199,0.25)" stroke-width="1"/>
+          <line x1="230" y1="230" x2="410" y2="270" stroke="rgba(2,132,199,0.25)" stroke-width="1"/>
+          <line x1="230" y1="230" x2="230" y2="400" stroke="rgba(2,132,199,0.25)" stroke-width="1"/>
+          <line x1="230" y1="230" x2="50" y2="310" stroke="rgba(2,132,199,0.25)" stroke-width="1"/>
+          <line x1="230" y1="230" x2="120" y2="390" stroke="rgba(2,132,199,0.2)'" stroke-width="1" stroke-dasharray="3 5"/>
+          <circle cx="230" cy="230" r="28" fill="rgba(2,132,199,0.08)" stroke="rgba(2,132,199,0.5)" stroke-width="1.5"/>
+          <circle cx="230" cy="230" r="6" fill="rgba(2,132,199,0.8)"/>
+          <text x="230" y="224" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" fill="var(--primary-blue)" letter-spacing="1" font-weight="600">PROCÉDÉ</text>
+          <circle cx="80" cy="100" r="20" fill="var(--white)" stroke="rgba(2,132,199,0.3)" stroke-width="1"/>
+          <text x="80" y="104" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)" font-weight="500">H₂S</text>
+          <circle cx="380" cy="100" r="20" fill="var(--white)" stroke="rgba(2,132,199,0.3)" stroke-width="1"/>
+          <text x="380" y="104" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)" font-weight="500">SO₂</text>
+          <circle cx="410" cy="270" r="20" fill="var(--white)" stroke="rgba(2,132,199,0.3)" stroke-width="1"/>
+          <text x="410" y="274" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)" font-weight="500">NOₓ</text>
+          <circle cx="230" cy="400" r="20" fill="var(--white)" stroke="rgba(2,132,199,0.3)" stroke-width="1"/>
+          <text x="230" y="404" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)" font-weight="500">NH₃</text>
+          <circle cx="50" cy="310" r="20" fill="var(--white)" stroke="rgba(2,132,199,0.3)" stroke-width="1"/>
+          <text x="50" y="314" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)" font-weight="500">COV</text>
+          <circle cx="120" cy="390" r="16" fill="var(--white)" stroke="rgba(2,132,199,0.2)" stroke-width="1" stroke-dasharray="2 3"/>
+          <text x="120" y="394" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="var(--muted)">CH₄</text>
+          <text x="230" y="36" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="10" fill="var(--muted)" letter-spacing="2" font-weight="600">POLLUANTS TRAITÉS</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="expertises">
+  <div class="s-inner">
+    <div class="s-tag reveal">Expertises</div>
+    <h2 class="s-h2 reveal">Trois axes d'ingénierie</h2>
+    <p class="s-sub reveal">Une couverture complète de l'ingénierie des procédés, de la modélisation théorique à l'optimisation terrain.</p>
+    <div class="exp-grid reveal-stagger">
+
+      <div class="exp-card">
+        <div class="exp-num">01</div>
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <h3>Génie des procédés industriels</h3>
+        <p>Analyse et conception des systèmes réactionnels pour une performance maximale.</p>
+        <ul>
+          <li>Modélisation hydrodynamique (DTS)</li>
+          <li>Analyse et diagnostic de réacteurs</li>
+          <li>Transferts de matière et de chaleur</li>
+          <li>Optimisation des colonnes de contact</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-num">02</div>
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 22 12 2 22 22H2z"/><path d="M12 8v6"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h3>Environnement &amp; Dépollution</h3>
+        <p>Solutions de traitement des gaz et effluents industriels conformes aux normes.</p>
+        <ul>
+          <li>Scrubbers chimiques à garnissage</li>
+          <li>Traitement des COV atmosphériques</li>
+          <li>Désodorisation industrielle</li>
+          <li>Réduction des émissions polluantes</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-num">03</div>
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <h3>Optimisation industrielle</h3>
+        <p>Amélioration des performances des unités existantes avec retour sur investissement mesurable.</p>
+        <ul>
+          <li>Audit et diagnostic énergétique</li>
+          <li>Réduction des coûts opératoires</li>
+          <li>Simulation et modélisation procédés</li>
+          <li>Plans d'action et suivi KPIs</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="s-inner">
+    <div class="s-tag reveal">Portfolio</div>
+    <h2 class="s-h2 reveal"><br> Projets &amp; références</h2>
+    <p class="s-sub reveal">Des missions de dimensionnement, diagnostic et conception menées avec rigueur scientifique.</p>
+    <div class="proj-grid">
+
+      <div class="proj-card wide reveal">
+        <div class="proj-label">Appel d'offre — Phase étude en cours</div>
+        <h3>Projet RAMSSA — Unité de Désodorisation Chimique</h3>
+        <p>
+          Dans le cadre de l'appel d'offre <strong style="color:var(--ink)">RAMSSA</strong>, ATLAS PUREGAZ intervient en phase d'étude pour la conception complète d'une unité de désodorisation industrielle à la Station <strong style="color:var(--ink)">SP MZ2</strong>.
+        </p>
+        <p>
+          Technologie sélectionnée : tour de lavage à garnissage (scrubber chimique), dimensionnement intégral, conception et optimisation du système de traitement des émissions odorantes.
+        </p>
+        <div class="proj-chips">
+          <span class="chip">Scrubber chimique</span>
+          <span class="chip">Tour à garnissage</span>
+          <span class="chip">Désodorisation H₂S / NH₃</span>
+          <span class="chip">Station SP MZ2</span>
+          <span class="chip">Dimensionnement</span>
+          <span class="chip">Appel d'offre</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-label">Recherche &amp; Analyse</div>
+        <h3>Diagnostic de réacteur — FST Mohammedia</h3>
+        <p>
+          Analyse d'un réacteur industriel par la méthode DTS. Étude des performances hydrodynamiques, identification des courts-circuits et zones mortes, recommandations d'optimisation.
+        </p>
+        <div class="proj-chips">
+          <span class="chip">DTS</span>
+          <span class="chip">Hydrodynamique</span>
+          <span class="chip">Modélisation</span>
+          <span class="chip">FST Mohammedia</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-label">Dépollution atmosphérique</div>
+        <h3>Élimination des COV industriels</h3>
+        <p>
+          Étude complète pour la réduction des composés organiques volatils dans les émissions industrielles. Sélection technologique, simulation des rendements d'abattement et optimisation des conditions opératoires.
+        </p>
+        <div class="proj-chips">
+          <span class="chip">COV</span>
+          <span class="chip">Émissions industrielles</span>
+          <span class="chip">Abattement &gt;95%</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-label">Transferts de matière</div>
+        <h3>Procédés gaz–liquide</h3>
+        <p>
+          Modélisation et optimisation des transferts dans les colonnes d'absorption : calcul des hauteurs de transfert, sélection des garnissages, conditions opératoires optimales et vérification hydraulique.
+        </p>
+        <div class="proj-chips">
+          <span class="chip">Absorption</span>
+          <span class="chip">Colonnes à garnissage</span>
+          <span class="chip">Gaz–liquide</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="objectifs">
+  <div class="s-inner">
+    <div class="s-tag reveal">Vision</div>
+    <h2 class="s-h2 reveal">Nos engagements</h2>
+    <p class="s-sub reveal">Chaque étude est guidée par des principes fondamentaux de qualité, de sécurité et de durabilité.</p>
+    <div class="obj-grid reveal-stagger">
+      <div class="obj-item reveal">
+        <div class="obj-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Sécurité industrielle</h3>
+        <p>Protection des installations contre la corrosion, les défaillances de procédé et les risques opérationnels, selon les standards internationaux.</p>
+      </div>
+      <div class="obj-item reveal">
+        <div class="obj-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Environnement</h3>
+        <p>Respect des normes environnementales marocaines et internationales. Réduction mesurable des impacts industriels sur l'air, l'eau et les milieux naturels.</p>
+      </div>
+      <div class="obj-item reveal">
+        <div class="obj-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <h3>Innovation durable</h3>
+        <p>Développement de solutions industrielles performantes, pérennes et adaptées aux enjeux de la transition énergétique et de la décarbonation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="cta-band">
+  <div class="cta-text reveal">
+    <h2>Un projet ? Un appel d'offre ?</h2>
+    <p>Contactez-nous pour discuter de votre problématique industrielle et obtenir une première analyse.</p>
+  </div>
+  <a href="#contact" class="btn-dark reveal">
+    Démarrer une étude
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<section id="contact">
+  <div class="s-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="s-tag">Contact</div>
+        <h2 class="s-h2">Parlons de votre projet</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:44px;font-weight:400;font-size:0.95rem">
+          Appel d'offre, diagnostic industriel, optimisation d'unité existante. Transmettez-nous votre besoin et nous vous répondrons sous 48h.
+        </p>
+        <div class="contact-line">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mohammedia, Maroc
+        </div>
+        <div class="contact-line">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.68 2 2 0 0 1 1.95-2.15h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +212 6 12 34 56 78
+        </div>
+        <div class="contact-line">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          contact@atlaspuregaz.ma
+        </div>
+        <div class="contact-line">
+          <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          tinyurl.com/atlaspuregaz
+        </div>
+        
+      </div>
+      <div class="form reveal">
+        <div class="fg"><label>Nom / Société <span style="color:#EF4444">*</span></label><input id="f-nom" type="text" placeholder="Ex : Société XYZ – M. Alami" oninput="clearErr(this,'e-nom')"><div id="e-nom" class="err-msg">Veuillez indiquer votre nom ou société.</div></div>
+        <div class="fg"><label>Email <span style="color:#EF4444">*</span></label><input id="f-email" type="email" placeholder="vous@societe.ma" oninput="clearErr(this,'e-email')"><div id="e-email" class="err-msg">Veuillez entrer une adresse email valide.</div></div>
+        <div class="fg">
+          <label>Type de demande <span style="color:#EF4444">*</span></label>
+          <select id="f-type" onchange="clearErr(this,'e-type')">
+            <option value="">Sélectionner...</option>
+            <option>Appel d'offre / Étude de conception</option>
+            <option>Diagnostic de procédé</option>
+            <option>Traitement des gaz / COV</option>
+            <option>Optimisation industrielle</option>
+            <option>Autre demande technique</option>
+          </select>
+          <div id="e-type" class="err-msg">Veuillez sélectionner un type de demande.</div>
+        </div>
+        <div class="fg"><label>Description du projet <span style="color:#EF4444">*</span></label><textarea id="f-desc" placeholder="Décrivez votre problématique industrielle, le site concerné et vos objectifs..." oninput="clearErr(this,'e-desc')"></textarea><div id="e-desc" class="err-msg">Veuillez décrire votre projet (minimum 20 caractères).</div></div>
+        <button class="btn-submit" onclick="submitForm(this)">
+          Envoyer la demande
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="eng-ticker">
+    <div class="eng-ticker-inner">
+      <span>⚙ GÉNIE DES PROCÉDÉS</span><span class="sep">///</span>
+      <span>⚗ TRAITEMENT DES GAZ</span><span class="sep">///</span>
+      <span>◈ HYDRODYNAMIQUE DTS</span><span class="sep">///</span>
+      <span>⬡ SCRUBBER CHIMIQUE</span><span class="sep">///</span>
+      <span>◎ COLONNES À GARNISSAGE</span><span class="sep">///</span>
+      <span>⌬ DÉPOLLUTION COV</span><span class="sep">///</span>
+      <span>⬢ TRANSFERTS DE MATIÈRE</span><span class="sep">///</span>
+      <span>⚠ ISO CONFORMITÉ</span><span class="sep">///</span>
+      <!-- duplicate for seamless loop -->
+      <span>⚙ GÉNIE DES PROCÉDÉS</span><span class="sep">///</span>
+      <span>⚗ TRAITEMENT DES GAZ</span><span class="sep">///</span>
+      <span>◈ HYDRODYNAMIQUE DTS</span><span class="sep">///</span>
+      <span>⬡ SCRUBBER CHIMIQUE</span><span class="sep">///</span>
+      <span>◎ COLONNES À GARNISSAGE</span><span class="sep">///</span>
+      <span>⌬ DÉPOLLUTION COV</span><span class="sep">///</span>
+      <span>⬢ TRANSFERTS DE MATIÈRE</span><span class="sep">///</span>
+      <span>⚠ ISO CONFORMITÉ</span><span class="sep">///</span>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-brand">ATLAS PUREGAZ</div>
+    <div class="footer-copy">© 2026 Atlas Puregaz — Bureau d'Études en Génie des Procédés &amp; Environnement — Mohammedia, Maroc</div>
+    <nav class="footer-links">
+      <a href="#about">À propos</a>
+      <a href="#expertises">Expertises</a>
+      <a href="#projets">Projets</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// ── PARTICLES ──
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+let pts=[],W,H;
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+function init(){pts=[];for(let i=0;i<65;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.25-.1,a:Math.random()*.4+.2,r:Math.random()*2+0.5})}
+function frame(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach((p,i)=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.y<-10){p.y=H+10;p.x=Math.random()*W}
+    if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
+    pts.slice(i+1).forEach(q=>{const d=Math.hypot(p.x-q.x,p.y-q.y);if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(2,132,199,${.08*(1-d/120)})`;ctx.lineWidth=.6;ctx.stroke()}});
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(2,132,199,${p.a})`;ctx.fill();
+  });requestAnimationFrame(frame)}
+resize();init();frame();addEventListener('resize',()=>{resize();init()});
+
+// ── SCROLL REVEAL ──
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── NAV ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>60);
+  const sy=scrollY+80;
+  document.querySelectorAll('section[id]').forEach(s=>{
+    if(sy>=s.offsetTop&&sy<s.offsetTop+s.offsetHeight)
+      document.querySelectorAll('.nav-links a').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+s.id)});
+  });
+});
+
+// ── MOBILE MENU ──
+let mOpen=false;
+function toggleMenu(){
+  mOpen=!mOpen;
+  const ul=document.querySelector('.nav-links');
+  if(mOpen){
+    ul.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(255,255,255,.98);box-shadow:0 10px 20px rgba(0,0,0,0.05);padding:28px;z-index:199;border-bottom:1px solid rgba(2,132,199,.15);gap:4px;';
+  } else {ul.style.cssText='display:none'}
+}
+
+// ── FORM VALIDATION ──
+function clearErr(el,eid){el.classList.remove('field-error');document.getElementById(eid).classList.remove('show')}
+function showErr(id,eid,msg){
+  const el=document.getElementById(id);
+  el.classList.add('field-error');
+  const e=document.getElementById(eid);e.textContent=msg;e.classList.add('show')}
+function isValidEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
+function submitForm(btn){
+  let ok=true;
+  const nom=document.getElementById('f-nom').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const type=document.getElementById('f-type').value;
+  const desc=document.getElementById('f-desc').value.trim();
+  if(!nom){showErr('f-nom','e-nom','Veuillez indiquer votre nom ou société.');ok=false}
+  if(!email||!isValidEmail(email)){showErr('f-email','e-email','Veuillez entrer une adresse email valide.');ok=false}
+  if(!type){showErr('f-type','e-type','Veuillez sélectionner un type de demande.');ok=false}
+  if(desc.length<20){showErr('f-desc','e-desc','Veuillez décrire votre projet (minimum 20 caractères).');ok=false}
+  if(!ok){btn.classList.add('shake');setTimeout(()=>btn.classList.remove('shake'),500);return}
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Message envoyé !';
+  btn.style.background='var(--mint-dark)';btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='Envoyer la demande <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    btn.style.background='var(--primary-blue)';btn.disabled=false;
+    ['f-nom','f-email','f-type','f-desc'].forEach(id=>{const el=document.getElementById(id);if(el.tagName==='SELECT')el.value='';else el.value=''});
+  },3500);
+}
+// ══════════════════════════════════════════════
+//  ⚙  ENGINEERING ANIMATIONS — ATLAS PUREGAZ
+// ══════════════════════════════════════════════
+
+// ── SCROLL PROGRESS BAR ──
+const progressBar = document.getElementById('scroll-progress');
+function updateProgress() {
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// ── ENGINEERING NETWORK CANVAS ──
+// Renforce le canvas existant avec un réseau de capteurs style P&ID
+const engCanvas = document.getElementById('eng-net');
+const engCtx = engCanvas.getContext('2d');
+let engPts = [], engW, engH, engMouse = { x: -9999, y: -9999 };
+
+function engResize() {
+  engW = engCanvas.width = window.innerWidth;
+  engH = engCanvas.height = window.innerHeight;
+}
+
+function engInit() {
+  engPts = [];
+  // Réseau de nœuds fixes façon capteurs industriels
+  const cols = Math.floor(engW / 180);
+  const rows = Math.floor(engH / 160);
+  for (let r = 0; r <= rows; r++) {
+    for (let c = 0; c <= cols; c++) {
+      engPts.push({
+        bx: (c / cols) * engW,
+        by: (r / rows) * engH,
+        x: (c / cols) * engW + (Math.random() - 0.5) * 80,
+        y: (r / rows) * engH + (Math.random() - 0.5) * 70,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        pulse: Math.random() * Math.PI * 2,
+        type: Math.random() > 0.85 ? 'sensor' : 'node', // some are sensor nodes
+        active: Math.random() > 0.6
+      });
+    }
+  }
+}
+
+let engFrame = 0;
+function engAnimate() {
+  engCtx.clearRect(0, 0, engW, engH);
+  engFrame++;
+
+  engPts.forEach(p => {
+    // gentle drift
+    p.x += p.vx;
+    p.y += p.vy;
+    // soft bound to base position
+    p.x += (p.bx - p.x) * 0.002;
+    p.y += (p.by - p.y) * 0.002;
+    p.pulse += 0.025;
+  });
+
+  // Draw connections (engineering network)
+  for (let i = 0; i < engPts.length; i++) {
+    for (let j = i + 1; j < engPts.length; j++) {
+      const dx = engPts[i].x - engPts[j].x;
+      const dy = engPts[i].y - engPts[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const maxDist = 200;
+      if (dist < maxDist) {
+        const alpha = (1 - dist / maxDist) * 0.055;
+        engCtx.beginPath();
+        engCtx.moveTo(engPts[i].x, engPts[i].y);
+        engCtx.lineTo(engPts[j].x, engPts[j].y);
+
+        // Animated data flow: dashed line travelling along connection
+        if (engPts[i].active && engPts[j].active && dist < 140) {
+          const flowAlpha = (1 - dist / 140) * 0.12;
+          engCtx.setLineDash([4, 8]);
+          engCtx.lineDashOffset = -(engFrame * 0.6) % 12;
+          engCtx.strokeStyle = `rgba(52,211,153,${flowAlpha})`;
+          engCtx.lineWidth = 0.8;
+          engCtx.stroke();
+          engCtx.setLineDash([]);
+        } else {
+          engCtx.setLineDash([]);
+          engCtx.strokeStyle = `rgba(2,132,199,${alpha})`;
+          engCtx.lineWidth = 0.5;
+          engCtx.stroke();
+        }
+      }
+    }
+  }
+
+  // Draw nodes
+  engPts.forEach(p => {
+    const pulseScale = 0.5 + 0.5 * Math.sin(p.pulse);
+
+    if (p.type === 'sensor') {
+      // Sensor node: square + outer ring
+      const s = 4;
+      engCtx.fillStyle = `rgba(52,211,153,${0.35 + 0.25 * pulseScale})`;
+      engCtx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
+      // outer pulse ring
+      if (p.active) {
+        const ring = 6 + 8 * pulseScale;
+        engCtx.beginPath();
+        engCtx.arc(p.x, p.y, ring, 0, Math.PI * 2);
+        engCtx.strokeStyle = `rgba(52,211,153,${0.12 * (1 - pulseScale)})`;
+        engCtx.lineWidth = 0.8;
+        engCtx.stroke();
+      }
+    } else {
+      // Regular network node
+      const r = 1.8 + 0.6 * pulseScale;
+      engCtx.beginPath();
+      engCtx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      engCtx.fillStyle = `rgba(2,132,199,${0.2 + 0.15 * pulseScale})`;
+      engCtx.fill();
+    }
+  });
+
+  // Mouse interaction: highlight nearby nodes
+  engPts.forEach(p => {
+    const dx = p.x - engMouse.x;
+    const dy = p.y - engMouse.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 120) {
+      engCtx.beginPath();
+      engCtx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+      engCtx.strokeStyle = `rgba(2,132,199,${0.3 * (1 - dist / 120)})`;
+      engCtx.lineWidth = 1;
+      engCtx.stroke();
+    }
+  });
+
+  requestAnimationFrame(engAnimate);
+}
+
+// Only run when canvas is visible / not printing
+engResize();
+engInit();
+engAnimate();
+
+window.addEventListener('resize', () => { engResize(); engInit(); });
+window.addEventListener('mousemove', e => {
+  engMouse.x = e.clientX;
+  engMouse.y = e.clientY;
+}, { passive: true });
+
+// Fade in engineering canvas
+setTimeout(() => {
+  engCanvas.style.transition = 'opacity 1.5s ease';
+  engCanvas.style.opacity = '0.55';
+}, 400);
+
+// ── COUNT-UP ANIMATION (compteurs industriels) ──
+function countUp(el) {
+  const target = parseInt(el.getAttribute('data-countup'), 10);
+  const suffix = el.getAttribute('data-suffix') || '';
+  const duration = 1400;
+  const start = performance.now();
+  const from = 0;
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(from + (target - from) * eased);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+// Trigger count-up when metrics enter viewport
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.counted) {
+      e.target.dataset.counted = '1';
+      countUp(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-countup]').forEach(el => countObserver.observe(el));
+
+// ── STAGGERED REVEAL ──
+const staggerObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      Array.from(e.target.children).forEach((child, i) => {
+        setTimeout(() => child.classList.add('in'), i * 90);
+      });
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal-stagger').forEach(el => staggerObs.observe(el));
+
+// ── SECTION TITLE UNDERLINE REVEAL ──
+const titleObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in');
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.s-h2').forEach(el => titleObs.observe(el));
+
+// ── PROJ-CARD & OBJ-ITEM stagger on scroll ──
+const cardObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.transitionDelay = e.target.dataset.delay || '0ms';
+      e.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.1 });
+
+// Auto-assign delay to proj-card children
+document.querySelectorAll('.proj-grid .proj-card').forEach((card, i) => {
+  card.dataset.delay = (i * 80) + 'ms';
+  card.classList.add('reveal');
+  cardObs.observe(card);
+});
+document.querySelectorAll('.obj-grid .obj-item').forEach((item, i) => {
+  item.dataset.delay = (i * 80) + 'ms';
+  item.classList.add('reveal');
+  cardObs.observe(item);
+});
+
+// ══════════════════════════════════════════════
+//  ⚙  ENHANCED INDUSTRIAL ANIMATIONS v2
+// ══════════════════════════════════════════════
+
+// ── GAS FLUX PARTICLES (dédié gaz industriel) ──
+(function() {
+  const gc = document.getElementById('gas-canvas');
+  if (!gc) return;
+  const gx = gc.getContext('2d');
+  let gW, gH, gasParticles = [];
+
+  function gasResize() {
+    gW = gc.width = window.innerWidth;
+    gH = gc.height = window.innerHeight;
+  }
+
+  function gasInit() {
+    gasParticles = [];
+    // Flux de gaz : petites bulles montantes + traces
+    for (let i = 0; i < 80; i++) {
+      gasParticles.push({
+        x: Math.random() * gW,
+        y: Math.random() * gH,
+        r: Math.random() * 2.5 + 0.5,
+        vy: -(Math.random() * 0.4 + 0.15),   // toujours ascendant
+        vx: (Math.random() - 0.5) * 0.12,
+        a: Math.random() * 0.25 + 0.05,
+        wobble: Math.random() * Math.PI * 2,
+        wobbleSpeed: (Math.random() - 0.5) * 0.03,
+        type: Math.random() > 0.7 ? 'stream' : 'bubble', // 30% streams
+        len: Math.random() * 18 + 6
+      });
+    }
+  }
+
+  function gasFrame() {
+    gx.clearRect(0, 0, gW, gH);
+    gasParticles.forEach(p => {
+      p.y += p.vy;
+      p.wobble += p.wobbleSpeed;
+      p.x += p.vx + Math.sin(p.wobble) * 0.08;
+      if (p.y < -10) { p.y = gH + 10; p.x = Math.random() * gW; }
+      if (p.x < -5)  p.x = gW + 5;
+      if (p.x > gW + 5) p.x = -5;
+
+      if (p.type === 'stream') {
+        // Trace de flux : ligne fine verticale avec dégradé
+        const grad = gx.createLinearGradient(p.x, p.y, p.x, p.y + p.len);
+        grad.addColorStop(0, `rgba(52,211,153,${p.a})`);
+        grad.addColorStop(1, `rgba(52,211,153,0)`);
+        gx.beginPath();
+        gx.moveTo(p.x, p.y);
+        gx.lineTo(p.x + p.vx * 8, p.y + p.len);
+        gx.strokeStyle = grad;
+        gx.lineWidth = p.r * 0.7;
+        gx.stroke();
+      } else {
+        // Bulle
+        gx.beginPath();
+        gx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        const isGreen = Math.random() > 0.6;
+        gx.fillStyle = `rgba(${isGreen ? '52,211,153' : '2,132,199'},${p.a})`;
+        gx.fill();
+      }
+    });
+    requestAnimationFrame(gasFrame);
+  }
+
+  gasResize();
+  gasInit();
+  gasFrame();
+  window.addEventListener('resize', () => { gasResize(); gasInit(); });
+  setTimeout(() => {
+    gc.style.transition = 'opacity 2s ease';
+    gc.style.opacity = '0.45';
+  }, 600);
+})();
+
+// ── DOM INJECTION: corner brackets on exp-cards ──
+document.querySelectorAll('.exp-card').forEach(card => {
+  const tl = document.createElement('div');
+  tl.className = 'corner-tl';
+  const br = document.createElement('div');
+  br.className = 'corner-br';
+  card.appendChild(tl);
+  card.appendChild(br);
+});
+
+// ── DOM INJECTION: scan line on proj-cards ──
+document.querySelectorAll('.proj-card').forEach(card => {
+  const sl = document.createElement('div');
+  sl.className = 'scan-line';
+  card.appendChild(sl);
+});
+
+// ── DOM INJECTION: eng-badge on obj-items ──
+document.querySelectorAll('.obj-item').forEach((item, i) => {
+  const badge = document.createElement('div');
+  badge.className = 'eng-badge';
+  badge.textContent = String(i + 1).padStart(2, '0');
+  item.style.position = 'relative';
+  item.appendChild(badge);
+});
+
+// ── METRIC ITEM animated bar on count-up end ──
+document.querySelectorAll('[data-countup]').forEach(el => {
+  const mi = el.closest('.metric-item');
+  el.addEventListener('countstart', () => { el.classList.add('counting'); });
+  el.addEventListener('countend', () => {
+    el.classList.remove('counting');
+    if (mi) mi.classList.add('counted');
+  });
+});
+
+// Patch countUp to fire events
+const _origCountUp = window._patchedCountUp;
+function countUpEnhanced(el) {
+  const target = parseInt(el.getAttribute('data-countup'), 10);
+  const suffix = el.getAttribute('data-suffix') || '';
+  const duration = 1600;
+  const start = performance.now();
+  el.dispatchEvent(new Event('countstart'));
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(target * eased);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else {
+      el.textContent = target + suffix;
+      el.dispatchEvent(new Event('countend'));
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+// Override the countObserver to use enhanced version
+const countObserver2 = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.counted2) {
+      e.target.dataset.counted2 = '1';
+      countUpEnhanced(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-countup]').forEach(el => countObserver2.observe(el));
+
+// ── LIVE SENSOR READOUTS (simulation télémétrie) ──
+(function() {
+  const phEl    = document.getElementById('s-ph');
+  const orpEl   = document.getElementById('s-orp');
+  const tempEl  = document.getElementById('s-temp');
+  const covEl   = document.getElementById('s-cov');
+  if (!phEl) return;
+
+  const sensors = {
+    ph:   { base: 7.4, range: 0.15, unit: '', fmt: v => v.toFixed(1) },
+    orp:  { base: 382, range: 8,    unit: ' mV', fmt: v => '+' + Math.round(v) },
+    temp: { base: 38,  range: 1.5,  unit: '°C',  fmt: v => Math.round(v) },
+    cov:  { base: 2.1, range: 0.3,  unit: ' ppm', fmt: v => v.toFixed(1) }
+  };
+
+  function updateSensors() {
+    const drift = t => sensors[t].base + (Math.random() - 0.5) * sensors[t].range * 2;
+    if (phEl)   phEl.textContent   = sensors.ph.fmt(drift('ph'))   + sensors.ph.unit;
+    if (orpEl)  orpEl.textContent  = sensors.orp.fmt(drift('orp'))  + sensors.orp.unit;
+    if (tempEl) tempEl.textContent = sensors.temp.fmt(drift('temp')) + sensors.temp.unit;
+    if (covEl)  covEl.textContent  = sensors.cov.fmt(drift('cov'))  + sensors.cov.unit;
+  }
+
+  setInterval(updateSensors, 2200);
+})();
+
+// ── ABOUT SECTION in-view class ──
+const aboutObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    e.target.classList.toggle('in-view', e.isIntersecting);
+  });
+}, { threshold: 0.2 });
+const aboutEl = document.getElementById('about');
+if (aboutEl) {
+  const dfLine = document.createElement('div');
+  dfLine.className = 'data-flow-line';
+  aboutEl.appendChild(dfLine);
+  aboutObs.observe(aboutEl);
+}
+
+// ── ENHANCED HOVER: exp-card glow ripple ──
+document.querySelectorAll('.exp-card').forEach(card => {
+  card.addEventListener('mouseenter', function(e) {
+    const rect = this.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+    this.style.setProperty('--glow-x', x + '%');
+    this.style.setProperty('--glow-y', y + '%');
+  });
+});
+
+</script>
+</body>
+</html>
