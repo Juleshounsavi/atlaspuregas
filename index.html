@@ -1197,7 +1197,7 @@ footer{
         
       </div>
       <div class="form reveal">
-        <div class="fg"><label>Nom / Société <span style="color:#EF4444">*</span></label><input id="f-nom" type="text" placeholder="Ex : Société XYZ – M. Alami" oninput="clearErr(this,'e-nom')"><div id="e-nom" class="err-msg">Veuillez indiquer votre nom ou société.</div></div>
+        <div class="fg"><label>Société <span style="color:#EF4444">*</span></label><input id="f-nom" type="text" placeholder="Ex : Société XYZ – M. Alami" oninput="clearErr(this,'e-nom')"><div id="e-nom" class="err-msg">Veuillez indiquer votre nom ou société.</div></div>
         <div class="fg"><label>Email <span style="color:#EF4444">*</span></label><input id="f-email" type="email" placeholder="nomsociete@gmail.com" oninput="clearErr(this,'e-email')"><div id="e-email" class="err-msg">Veuillez entrer une adresse email valide.</div></div>
         <div class="fg">
           <label>Type de demande <span style="color:#EF4444">*</span></label>
@@ -1304,7 +1304,7 @@ function showErr(id,eid,msg){
   el.classList.add('field-error');
   const e=document.getElementById(eid);e.textContent=msg;e.classList.add('show')}
 function isValidEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
-function submitForm(btn){
+async function submitForm(btn){
   let ok=true;
   const nom=document.getElementById('f-nom').value.trim();
   const email=document.getElementById('f-email').value.trim();
@@ -1315,13 +1315,40 @@ function submitForm(btn){
   if(!type){showErr('f-type','e-type','Veuillez sélectionner un type de demande.');ok=false}
   if(desc.length<20){showErr('f-desc','e-desc','Veuillez décrire votre projet (minimum 20 caractères).');ok=false}
   if(!ok){btn.classList.add('shake');setTimeout(()=>btn.classList.remove('shake'),500);return}
-  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Message envoyé !';
-  btn.style.background='var(--mint-dark)';btn.disabled=true;
-  setTimeout(()=>{
-    btn.innerHTML='Envoyer la demande <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-    btn.style.background='var(--primary-blue)';btn.disabled=false;
-    ['f-nom','f-email','f-type','f-desc'].forEach(id=>{const el=document.getElementById(id);if(el.tagName==='SELECT')el.value='';else el.value=''});
-  },3500);
+
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg> Envoi en cours...';
+  btn.disabled=true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/meewpqwz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        'Societe': nom,
+        'Email': email,
+        'Type de demande': type,
+        'Description': desc
+      })
+    });
+    if(res.ok){
+      btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Message envoye !';
+      btn.style.background='var(--mint-dark)';
+      setTimeout(()=>{
+        btn.innerHTML='Envoyer la demande <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background='var(--primary-blue)';btn.disabled=false;
+        ['f-nom','f-email','f-type','f-desc'].forEach(id=>{const el=document.getElementById(id);if(el.tagName==='SELECT')el.value='';else el.value=''});
+      },3500);
+    } else {
+      throw new Error('Erreur serveur');
+    }
+  } catch(err){
+    btn.innerHTML='Erreur — Reessayer';
+    btn.style.background='#EF4444';btn.disabled=false;
+    setTimeout(()=>{
+      btn.innerHTML='Envoyer la demande <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+      btn.style.background='var(--primary-blue)';
+    },3000);
+  }
 }
 // ══════════════════════════════════════════════
 //  ⚙  ENGINEERING ANIMATIONS — ATLAS PUREGAS
